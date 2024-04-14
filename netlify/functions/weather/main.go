@@ -14,14 +14,8 @@ import (
 func handler(ctx context.Context, request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
 
 	latitude := request.QueryStringParameters["latitude"]
-	if latitude == "" {
-		latitude = "41.8826281"
-	}
 
 	longitude := request.QueryStringParameters["longitude"]
-	if longitude == "" {
-		longitude = "-87.6225291"
-	}
 
 	if latitude == "" || longitude == "" {
 		log.Println("latitude and longitude are required")
