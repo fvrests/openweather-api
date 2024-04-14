@@ -11,6 +11,15 @@ import (
 	"github.com/aws/aws-lambda-go/lambda"
 )
 
+var HEADERS = map[string]string{
+	"Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Origin",
+	"Content-Type":                 "application/json",
+	"Access-Control-Allow-Methods": "POST, OPTIONS",
+	"Access-Control-Max-Age":       "8640",
+	"Access-Control-Allow-Origin":  "*",
+	"Vary":                         "Origin",
+}
+
 func handler(ctx context.Context, request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
 
 	latitude := request.QueryStringParameters["latitude"]
@@ -36,7 +45,7 @@ func handler(ctx context.Context, request events.APIGatewayProxyRequest) (*event
 
 	return &events.APIGatewayProxyResponse{
 		StatusCode:      200,
-		Headers:         map[string]string{"Content-Type": "text/plain"},
+		Headers:         HEADERS,
 		Body:            string(bodyBytes),
 		IsBase64Encoded: false,
 	}, nil
